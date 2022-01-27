@@ -10,8 +10,8 @@ up-build:
 	docker-compose exec -u root app chmod 755 -R /var/www/html/bootstrap/cache
 	docker-compose exec -u root app chmod 755 -R /var/www/html/storage
 	docker-compose exec -u root app chmod 755 /var/www/html/package-lock.json
-	docker-compose exec app php artisan key:generate
 	docker-compose exec app composer install
 	docker-compose exec app npm install
+	docker-compose exec app php artisan key:generate
 	docker-compose exec app php artisan optimize:clear
 
