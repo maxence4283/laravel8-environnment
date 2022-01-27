@@ -1,0 +1,49 @@
+version: "3.7"
+
+services:
+  mysql:
+    build: images/mysql
+    container_name: laravel-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_USER: laravel
+      MYSQL_PASSWORD: laravel
+      MYSQL_DATABASE: laravel
+    volumes:
+      - ./images/mysql/datas:/var/lib/mysql
+    ports:
+      - "3306:3306"
+
+  app:
+    build: images/engine
+    container_name: laravel-app
+    volumes:
+      - ./:/var/www/html
+    entrypoint:
+      - php-fpm
+    links:
+      - mysql
+
+  redis:
+      build: images/redis
+      container_name: laravel-redis
+      ports:
+          - "6379:6379"
+
+  nginx:
+    build: images/front
+    container_name: laravel-nginx
+    ports:
+      - "8000:80"
+    volumes:
+      - ./:/var/www/html
+    links:
+      - app
+
+  phpmyadmin:
+    image: nazarpc/phpmyadmin
+    container_name: laravel-phpmyadmin
+    links:
+      - mysql
+    ports:
+      - "8080:80"
