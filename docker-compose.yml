@@ -1,4 +1,4 @@
-version: "3.7"
+version: "3"
 
 services:
   mysql:
@@ -41,9 +41,11 @@ services:
       - app
 
   phpmyadmin:
-    image: nazarpc/phpmyadmin
+    image: phpmyadmin
     container_name: laravel-phpmyadmin
-    links:
-      - mysql
+    environment:
+      - PMA_HOST=mysql
     ports:
       - "8080:80"
+    links:
+      - mysql
