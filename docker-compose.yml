@@ -10,7 +10,7 @@ services:
       MYSQL_PASSWORD: laravel
       MYSQL_DATABASE: laravel
     volumes:
-      - ./images/mysql/datas:/var/lib/mysql
+      - ./images/mysql:/var/lib/mysql
     ports:
       - "3306:3306"
 

@@ -1,2 +1,4 @@
-/datas
+*
+!/ressources
+!Dockerfile
 
